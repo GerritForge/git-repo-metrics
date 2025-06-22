@@ -8,6 +8,7 @@ Metrics are updated either upon a `ref-update` receive or on a time based refres
 Currently, the metrics exposed are the following:
 
 ```bash
+plugins_git_repo_metrics_metricscollectiontime_<repo_name>
 plugins_git_repo_metrics_numberofbitmaps_<repo_name>
 plugins_git_repo_metrics_numberoflooseobjects_<repo_name>
 plugins_git_repo_metrics_numberoflooserefs_<repo_name>
@@ -31,6 +32,8 @@ plugins_git_repo_metrics_numberofpackfilessincebitmap_<repo_name>
 >   string for instance `repo/name` is sanitized to `repo_0x2F_name`
 > - if the repository name contains the replacement prefix `(_0x)` it is prefixed with another `_0x`
 >   e.g. `repo_0x2F_name` becomes `repo_0x_0x2F_name`.
+> - the `metricscollectiontime` is a meta metric and represents system time (in millis) when metrics were
+>   collected - to easily verify if metrics are stale
 
 Settings
 --------

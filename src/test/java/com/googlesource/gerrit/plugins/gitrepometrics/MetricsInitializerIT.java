@@ -27,6 +27,7 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetaMetricsCollector;
 import java.time.Duration;
 import org.junit.After;
 import org.junit.Test;
@@ -42,6 +43,7 @@ public class MetricsInitializerIT extends LightweightPluginDaemonTest {
   private FSMetricsCollector fsMetricsCollector;
   private GitStatsMetricsCollector gitStatsMetricsCollector;
   private GitRefsMetricsCollector gitRefsMetricsCollector;
+  private MetaMetricsCollector metaMetricsCollector;
   private Slf4jReporter metricReporter;
 
   @Override
@@ -51,6 +53,7 @@ public class MetricsInitializerIT extends LightweightPluginDaemonTest {
     fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
     gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
     gitRefsMetricsCollector = plugin.getSysInjector().getInstance(GitRefsMetricsCollector.class);
+    metaMetricsCollector = plugin.getSysInjector().getInstance(MetaMetricsCollector.class);
     metricReporter = Slf4jReporter.forRegistry(metricRegistry).build();
   }
 
@@ -70,7 +73,8 @@ public class MetricsInitializerIT extends LightweightPluginDaemonTest {
     int expectedMetricsCount =
         fsMetricsCollector.availableMetrics().size()
             + gitStatsMetricsCollector.availableMetrics().size()
-            + gitRefsMetricsCollector.availableMetrics().size();
+            + gitRefsMetricsCollector.availableMetrics().size()
+            + metaMetricsCollector.availableMetrics().size();
 
     try {
       WaitUtil.waitUntil(
