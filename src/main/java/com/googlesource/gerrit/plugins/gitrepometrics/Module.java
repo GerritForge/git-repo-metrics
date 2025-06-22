@@ -22,6 +22,7 @@ import com.google.inject.Scopes;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetaMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -59,6 +60,7 @@ public class Module extends LifecycleModule {
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitStatsMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitRefsMetricsCollector.class);
+    DynamicSet.bind(binder(), MetricsCollector.class).to(MetaMetricsCollector.class);
     install(new UpdateGitMetricsTaskModule());
   }
 }

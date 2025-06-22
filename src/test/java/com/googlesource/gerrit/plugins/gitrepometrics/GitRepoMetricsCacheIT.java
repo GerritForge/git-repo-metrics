@@ -35,6 +35,7 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetaMetricsCollector;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
@@ -51,6 +52,7 @@ import org.junit.Test;
 public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
 
   public static final String NUM_LOOSE_REFS = "numberoflooserefs";
+  private static final String METRICS_COLLECTION_TIME = "metricscollectiontime";
   private static final long HEAD_MASTER_REFS_META_CONFIG_NUM_REFS = 3;
   private final int MAX_WAIT_TIME_FOR_METRICS_SECS = 5;
 
@@ -58,6 +60,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
   private FSMetricsCollector fsMetricsCollector;
   private GitStatsMetricsCollector gitStatsMetricsCollector;
   private GitRefsMetricsCollector gitRefsMetricsCollector;
+  private MetaMetricsCollector metaMetricsCollector;
   private GitRepoMetricsCache gitRepoMetricsCache;
   private Slf4jReporter metricReporter;
 
@@ -74,6 +77,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
     gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
     gitRefsMetricsCollector = plugin.getSysInjector().getInstance(GitRefsMetricsCollector.class);
+    metaMetricsCollector = plugin.getSysInjector().getInstance(MetaMetricsCollector.class);
     metricReporter = Slf4jReporter.forRegistry(metricRegistry).build();
   }
 
@@ -116,7 +120,8 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     int expectedMetricsCount =
         fsMetricsCollector.availableMetrics().size()
             + gitStatsMetricsCollector.availableMetrics().size()
-            + gitRefsMetricsCollector.availableMetrics().size();
+            + gitRefsMetricsCollector.availableMetrics().size()
+            + metaMetricsCollector.availableMetrics().size();
 
     try {
       WaitUtil.waitUntil(
@@ -154,6 +159,30 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     addTwoBranchesToProjectAndAssertLooseRefsMetrics();
   }
 
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(
+      pluginName = "git-repo-metrics",
+      name = "git-repo-metrics.project",
+      value = "testProject1")
+  public void shouldUpdateMetaMetricsOnRefUpdate() throws Exception {
+    addBranchToProjectAndAssertMetaMetrics();
+  }
+
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(
+      pluginName = "git-repo-metrics",
+      name = "git-repo-metrics.project",
+      value = "testProject1")
+  @GlobalPluginConfig(
+      pluginName = "git-repo-metrics",
+      name = "git-repo-metrics.gracePeriod",
+      value = "1 s")
+  public void shouldUpdateMetaMetricsOnRefUpdateWithGracePeriod() throws Exception {
+    addBranchToProjectAndAssertMetaMetrics();
+  }
+
   private void addTwoBranchesToProjectAndAssertLooseRefsMetrics()
       throws InterruptedException, RestApiException {
     long initialLooseRefs =
@@ -167,6 +196,18 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     createBranch("branch2");
     waitForMetricValue(
         testProject1.get(), NUM_LOOSE_REFS, (value) -> value == initialLooseRefs + 2);
+  }
+
+  private void addBranchToProjectAndAssertMetaMetrics()
+      throws InterruptedException, RestApiException {
+    long initialMetricsCollectionTime =
+        waitForMetricValue(testProject1.get(), METRICS_COLLECTION_TIME, (v) -> true);
+
+    createBranch("branch1");
+    waitForMetricValue(
+        testProject1.get(),
+        METRICS_COLLECTION_TIME,
+        (value) -> value > initialMetricsCollectionTime);
   }
 
   @CanIgnoreReturnValue
