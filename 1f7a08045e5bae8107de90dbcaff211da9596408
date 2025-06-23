@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67aa3880_f55f6f28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-23T18:06:56Z",
+      "side": 1,
+      "message": "nit: `s/seves/serves`",
+      "range": {
+        "startLine": 12,
+        "startChar": 22,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "1f7a08045e5bae8107de90dbcaff211da9596408",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f533150f_ece8155d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetaMetricsCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-23T18:06:56Z",
+      "side": 1,
+      "message": "nit: `s/Count/Milliseconds`",
+      "range": {
+        "startLine": 29,
+        "startChar": 81,
+        "endLine": 29,
+        "endChar": 86
+      },
+      "revId": "1f7a08045e5bae8107de90dbcaff211da9596408",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc17de9_042c9d1d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-23T18:06:56Z",
+      "side": 1,
+      "message": "nit: `s/TIme/Time`",
+      "range": {
+        "startLine": 203,
+        "startChar": 33,
+        "endLine": 203,
+        "endChar": 37
+      },
+      "revId": "1f7a08045e5bae8107de90dbcaff211da9596408",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
