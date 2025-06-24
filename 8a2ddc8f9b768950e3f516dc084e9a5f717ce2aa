@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b02afd2_17e7e926",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-24T17:31:10Z",
+      "side": 1,
+      "message": "Shall we have a kick-off session on this feature? I don\u0027t follow the implementation of what it is trying to achieve.",
+      "revId": "8a2ddc8f9b768950e3f516dc084e9a5f717ce2aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af5a6724_2fa014a5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/Module.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-24T17:31:10Z",
+      "side": 1,
+      "message": "I don\u0027t believe we need yet another collector.",
+      "revId": "8a2ddc8f9b768950e3f516dc084e9a5f717ce2aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "243634f8_c9731053",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetaMetricsCollector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-06-24T17:31:10Z",
+      "side": 1,
+      "message": "I am not following: why do we need yet another collector? I believe we just need to _remember_ the timestamp of when a metric was recorded in the GitRepoMetricsCache.",
+      "revId": "8a2ddc8f9b768950e3f516dc084e9a5f717ce2aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97eae407_afbb5a76",
