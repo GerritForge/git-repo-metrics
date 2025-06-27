@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c235a4_06e8d2db",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/Module.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-27T05:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af5a6724_2fa014a5",
+      "revId": "8a2ddc8f9b768950e3f516dc084e9a5f717ce2aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "243634f8_c9731053",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34fed2f7_7b25bb2d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetaMetricsCollector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-27T05:34:39Z",
+      "side": 1,
+      "message": "I believe that it should be fine now.",
+      "parentUuid": "243634f8_c9731053",
+      "revId": "8a2ddc8f9b768950e3f516dc084e9a5f717ce2aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97eae407_afbb5a76",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetaMetricsCollector.java",
         "patchSetId": 2
@@ -65,6 +101,30 @@
       "writtenOn": "2025-06-24T14:24:36Z",
       "side": 1,
       "message": "Since each metric group is collected asynchronously and may require different amounts of time, the shared executor can cause significant variation in collection timestamps between groups.\n\nIt might be more accurate to record a separate collection timestamp for each metric group. We observed for example on unoptimized repositories git statistic taking different seconds to be collected in particular when using NFS.\n\nWDYT?",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "8a2ddc8f9b768950e3f516dc084e9a5f717ce2aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffe751ab_f201ba4d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetaMetricsCollector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-27T05:34:39Z",
+      "side": 1,
+      "message": "It is actually good idea especially in case when multiple threads are assigned to the executor.",
+      "parentUuid": "97eae407_afbb5a76",
       "range": {
         "startLine": 26,
         "startChar": 13,
