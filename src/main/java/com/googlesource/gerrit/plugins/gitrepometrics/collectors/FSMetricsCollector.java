@@ -24,13 +24,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 
-public class FSMetricsCollector implements MetricsCollector {
+public class FSMetricsCollector extends AbstractMetricsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   static class MetricsRecord {
@@ -86,28 +84,14 @@ public class FSMetricsCollector implements MetricsCollector {
       ImmutableList.of(
           numberOfKeepFiles, numberOfEmptyDirectories, numberOfFiles, numberOfDirectories);
 
-  private final ExecutorService executorService;
-
   @Inject
   public FSMetricsCollector(@UpdateGitMetricsExecutor ScheduledExecutorService executorService) {
-    this.executorService = executorService;
+    super(executorService, "fs");
   }
 
   @Override
-  public void collect(
-      FileRepository repository,
-      String projectName,
-      Consumer<HashMap<GitRepoMetric, Long>> populateMetrics) {
-
-    executorService.submit(
-        () -> {
-          populateMetrics.accept(filesAndDirectoriesCount(repository, projectName));
-        });
-  }
-
-  private HashMap<GitRepoMetric, Long> filesAndDirectoriesCount(
+  protected HashMap<GitRepoMetric, Long> computeMetrics(
       FileRepository repository, String projectName) {
-
     try (Stream<Path> objDir = Files.walk(repository.getObjectsDirectory().toPath())) {
       MetricsRecord metricsRecord =
           objDir
@@ -144,12 +128,12 @@ public class FSMetricsCollector implements MetricsCollector {
   }
 
   @Override
-  public String getMetricsCollectorName() {
-    return "filesystem-statistics";
+  protected ImmutableList<GitRepoMetric> collectorMetrics() {
+    return availableMetrics;
   }
 
   @Override
-  public ImmutableList<GitRepoMetric> availableMetrics() {
-    return availableMetrics;
+  public String getMetricsCollectorName() {
+    return "filesystem-statistics";
   }
 }
