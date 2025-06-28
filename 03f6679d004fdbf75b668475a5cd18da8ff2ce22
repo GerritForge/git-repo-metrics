@@ -9,12 +9,9 @@
       "updated": "2025-04-15T13:05:13Z"
     },
     "gerritforge:git-repo-metrics-format-dcf840cc5047dd58175ddbe23ab81198c837f353": {
-      "state": "SUCCESSFUL",
-      "url": "https://gerrit-ci.gerritforge.com/job/plugin-git-repo-metrics-verifier/job/41%252F468041%252F4/1/console",
-      "started": "2025-04-15T13:03:08Z",
-      "finished": "2025-04-15T13:03:33Z",
+      "state": "NOT_STARTED",
       "created": "2025-04-15T13:03:08Z",
-      "updated": "2025-04-15T13:03:33Z"
+      "updated": "2025-06-28T04:47:10Z"
     }
   }
 }
