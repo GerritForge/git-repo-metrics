@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a34f6e8_7ee077d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-06-30T16:40:24Z",
+      "side": 1,
+      "message": "\u003e Adding a metric that is calculated in the same way for all metric groups could be done in each collector but it would raise the code duplication (that is already there) even higher.\n\nOk, in which case I would keep it separate from the feature itself.",
+      "parentUuid": "3640938c_4b341dd1",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feccd678_a0a3f86c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
         "patchSetId": 4
