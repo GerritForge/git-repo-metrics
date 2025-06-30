@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d4175d2_07e7beba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-06-30T12:06:20Z",
+      "side": 1,
+      "message": "If the refactoring is needed I would separate it from the change targeting the feature we are implementing.",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feccd678_a0a3f86c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-06-30T12:06:20Z",
+      "side": 1,
+      "message": "This is never used",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef6c72b_4ce14435",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-06-30T12:06:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the interface forcing the implementation of this method?",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3634a6a8_61908013",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-06-30T12:06:20Z",
+      "side": 1,
+      "message": "This looks like a renaming of \u0027availableMetrics\u0027.\n\nSince we now have an AbstractClass can we pass the available metrics in the constructor and make \"availableMetrics()\" to be a getter?",
+      "range": {
+        "startLine": 62,
+        "startChar": 50,
+        "endLine": 62,
+        "endChar": 66
+      },
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
