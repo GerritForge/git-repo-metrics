@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3640938c_4b341dd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-30T16:25:33Z",
+      "side": 1,
+      "message": "Adding a metric that is calculated in the same way for all metric groups could be done in each collector but it would raise the code duplication (that is already there) even higher.\nIt can always be done a better way but in this case it somehow explains itself and is quite limited ;)",
+      "parentUuid": "8d4175d2_07e7beba",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feccd678_a0a3f86c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-30T12:06:20Z",
       "side": 1,
       "message": "This is never used",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9959e7b_c2460482",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-30T16:25:33Z",
+      "side": 1,
+      "message": "It is a part of the interface and in fact it is used in integration tests :D",
+      "parentUuid": "feccd678_a0a3f86c",
       "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be5a1711_47950e65",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-30T16:25:33Z",
+      "side": 1,
+      "message": "Interface remained unchanged so that the refactoring in question is limited.",
+      "parentUuid": "bef6c72b_4ce14435",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3634a6a8_61908013",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
         "patchSetId": 4
@@ -65,6 +119,30 @@
       "writtenOn": "2025-06-30T12:06:20Z",
       "side": 1,
       "message": "This looks like a renaming of \u0027availableMetrics\u0027.\n\nSince we now have an AbstractClass can we pass the available metrics in the constructor and make \"availableMetrics()\" to be a getter?",
+      "range": {
+        "startLine": 62,
+        "startChar": 50,
+        "endLine": 62,
+        "endChar": 66
+      },
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "968af875_d8bb9d26",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-06-30T16:25:33Z",
+      "side": 1,
+      "message": "Yeap, that could be done.",
+      "parentUuid": "3634a6a8_61908013",
       "range": {
         "startLine": 62,
         "startChar": 50,
