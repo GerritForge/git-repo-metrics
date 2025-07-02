@@ -88,6 +88,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c407418_d9367376",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetaMetricsCollector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-07-02T06:11:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34fed2f7_7b25bb2d",
+      "revId": "8a2ddc8f9b768950e3f516dc084e9a5f717ce2aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97eae407_afbb5a76",

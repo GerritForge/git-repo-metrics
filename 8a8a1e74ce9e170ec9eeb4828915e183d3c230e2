@@ -54,6 +54,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b383b14_781b4efa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-07-02T06:11:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a34f6e8_7ee077d8",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "feccd678_a0a3f86c",
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Interface remained unchanged so that the refactoring in question is limited.",
       "parentUuid": "bef6c72b_4ce14435",
+      "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63abd0c1_57e771b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/AbstractMetricsCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-07-02T06:11:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be5a1711_47950e65",
       "revId": "8a8a1e74ce9e170ec9eeb4828915e183d3c230e2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
