@@ -35,13 +35,6 @@ public interface MetricsCollector {
       Consumer<HashMap<GitRepoMetric, Long>> populateMetrics);
 
   /**
-   * Returns the name of the metric collector.
-   *
-   * @return {@code String} with the metric collector name
-   */
-  String getMetricsCollectorName();
-
-  /**
    * Returns the list of available metrics provided by the collector.
    *
    * @return {@code ImmutableList<GitRepoMetric>} with the {@link GitRepoMetric} provided by the
