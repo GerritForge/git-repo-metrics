@@ -81,10 +81,17 @@ public class FSMetricsCollector implements MetricsCollector {
       new GitRepoMetric("numberOfDirectories", "Number of directories on filesystem", "Count");
   protected static final GitRepoMetric numberOfFiles =
       new GitRepoMetric("numberOfFiles", "Number of directories on filesystem", "Count");
+  private static final GitRepoMetric collectionTime =
+      new GitRepoMetric(
+          "fsMetricsCollectionTime", "Timestamp at which metrics were collected", "Milliseconds");
 
   private static final ImmutableList<GitRepoMetric> availableMetrics =
       ImmutableList.of(
-          numberOfKeepFiles, numberOfEmptyDirectories, numberOfFiles, numberOfDirectories);
+          numberOfKeepFiles,
+          numberOfEmptyDirectories,
+          numberOfFiles,
+          numberOfDirectories,
+          collectionTime);
 
   private final ExecutorService executorService;
 
@@ -101,7 +108,9 @@ public class FSMetricsCollector implements MetricsCollector {
 
     executorService.submit(
         () -> {
-          populateMetrics.accept(filesAndDirectoriesCount(repository, projectName));
+          HashMap<GitRepoMetric, Long> metrics = filesAndDirectoriesCount(repository, projectName);
+          metrics.put(collectionTime, System.currentTimeMillis());
+          populateMetrics.accept(metrics);
         });
   }
 
