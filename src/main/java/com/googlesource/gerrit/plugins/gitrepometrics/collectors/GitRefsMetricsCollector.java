@@ -26,72 +26,46 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Ref;
 
-public class GitRefsMetricsCollector implements MetricsCollector {
+public class GitRefsMetricsCollector extends AbstractMetricsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   @VisibleForTesting
   protected static final GitRepoMetric combinedRefsSha1 =
       new GitRepoMetric("combinedRefsSha1", "Numeric value of combined refs SHA-1's", "Number");
 
-  private static final GitRepoMetric collectionTime =
-      new GitRepoMetric(
-          "refsMetricsCollectionTime", "Timestamp at which metrics were collected", "Milliseconds");
-
   private static final ImmutableList<GitRepoMetric> availableMetrics =
-      ImmutableList.of(combinedRefsSha1, collectionTime);
-
-  private final ExecutorService executorService;
+      ImmutableList.of(combinedRefsSha1);
 
   @Inject
   GitRefsMetricsCollector(@UpdateGitMetricsExecutor ScheduledExecutorService executorService) {
-    this.executorService = executorService;
+    super(executorService, "refs", availableMetrics);
   }
 
   @Override
-  public void collect(
-      FileRepository repository,
-      String projectName,
-      Consumer<HashMap<GitRepoMetric, Long>> populateMetrics) {
-    executorService.submit(
-        () -> {
-          try {
-            long collectionStartTime = System.currentTimeMillis();
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            repository.getRefDatabase().getRefs().stream()
-                .filter(ref -> !ref.isSymbolic())
-                .sorted(Comparator.comparing(Ref::getName))
-                .forEach(ref -> md.update(ref.getObjectId().toString().getBytes(UTF_8)));
-            int sha1Int = truncateHashToInt(md.digest());
+  protected HashMap<GitRepoMetric, Long> computeMetrics(
+      FileRepository repository, String projectName) {
+    HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
+    try {
+      MessageDigest md = MessageDigest.getInstance("SHA-1");
+      repository.getRefDatabase().getRefs().stream()
+          .filter(ref -> !ref.isSymbolic())
+          .sorted(Comparator.comparing(Ref::getName))
+          .forEach(ref -> md.update(ref.getObjectId().toString().getBytes(UTF_8)));
+      int sha1Int = truncateHashToInt(md.digest());
 
-            HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
-            metrics.put(combinedRefsSha1, (long) sha1Int);
-            metrics.put(collectionTime, collectionStartTime);
-            populateMetrics.accept(metrics);
-          } catch (NoSuchAlgorithmException e) {
-            logger.atSevere().withCause(e).log(
-                "Could not obtain SHA-1 implementation will not compute the combinedRefsSha1"
-                    + " metric");
-          } catch (IOException e) {
-            logger.atSevere().withCause(e).log(
-                "Computing combinedRefsSha1 failed. Will retry next time");
-          }
-        });
-  }
-
-  @Override
-  public String getMetricsCollectorName() {
-    return "repo-ref-statistics";
-  }
-
-  @Override
-  public ImmutableList<GitRepoMetric> availableMetrics() {
-    return availableMetrics;
+      metrics.put(combinedRefsSha1, (long) sha1Int);
+    } catch (NoSuchAlgorithmException e) {
+      logger.atSevere().withCause(e).log(
+          "Could not obtain SHA-1 implementation will not compute the combinedRefsSha1"
+              + " metric");
+    } catch (IOException e) {
+      logger.atSevere().withCause(e).log("Computing combinedRefsSha1 failed. Will retry next time");
+    }
+    return metrics;
   }
 
   // Source
