@@ -39,8 +39,12 @@ public class GitRefsMetricsCollector implements MetricsCollector {
   protected static final GitRepoMetric combinedRefsSha1 =
       new GitRepoMetric("combinedRefsSha1", "Numeric value of combined refs SHA-1's", "Number");
 
+  private static final GitRepoMetric collectionTime =
+      new GitRepoMetric(
+          "refsMetricsCollectionTime", "Timestamp at which metrics were collected", "Milliseconds");
+
   private static final ImmutableList<GitRepoMetric> availableMetrics =
-      ImmutableList.of(combinedRefsSha1);
+      ImmutableList.of(combinedRefsSha1, collectionTime);
 
   private final ExecutorService executorService;
 
@@ -57,6 +61,7 @@ public class GitRefsMetricsCollector implements MetricsCollector {
     executorService.submit(
         () -> {
           try {
+            long collectionStartTime = System.currentTimeMillis();
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             repository.getRefDatabase().getRefs().stream()
                 .filter(ref -> !ref.isSymbolic())
@@ -66,6 +71,7 @@ public class GitRefsMetricsCollector implements MetricsCollector {
 
             HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
             metrics.put(combinedRefsSha1, (long) sha1Int);
+            metrics.put(collectionTime, collectionStartTime);
             populateMetrics.accept(metrics);
           } catch (NoSuchAlgorithmException e) {
             logger.atSevere().withCause(e).log(

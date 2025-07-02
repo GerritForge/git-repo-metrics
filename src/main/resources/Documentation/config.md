@@ -16,13 +16,16 @@ plugins_git_repo_metrics_numberofpackedrefs_<repo_name>
 plugins_git_repo_metrics_numberofpackfiles_<repo_name>
 plugins_git_repo_metrics_sizeoflooseobjects_<repo_name>
 plugins_git_repo_metrics_sizeofpackedobjects_<repo_name>
+plugins_git_repo_metrics_numberofobjectssincebitmap_<repo_name>
+plugins_git_repo_metrics_numberofpackfilessincebitmap_<repo_name>
+plugins_git_repo_metrics_gitmetricscollectiontime_<repo_name>
 plugins_git_repo_metrics_numberofkeepfiles_<repo_name>
 plugins_git_repo_metrics_numberoffiles_<repo_name>
 plugins_git_repo_metrics_numberofdirectories_<repo_name>
 plugins_git_repo_metrics_numberofemptydirectories_<repo_name>
+plugins_git_repo_metrics_fsmetricscollectiontime_<repo_name>
 plugins_git_repo_metrics_combinedrefssha1_<repo_name>
-plugins_git_repo_metrics_numberofobjectssincebitmap_<repo_name>
-plugins_git_repo_metrics_numberofpackfilessincebitmap_<repo_name>
+plugins_git_repo_metrics_refsmetricscollectiontime_<repo_name>
 ```
 
 > **NOTE**: The `<repo_name>` is a subject of sanitization in order to avoid collision between repository names.
@@ -31,6 +34,8 @@ plugins_git_repo_metrics_numberofpackfilessincebitmap_<repo_name>
 >   string for instance `repo/name` is sanitized to `repo_0x2F_name`
 > - if the repository name contains the replacement prefix `(_0x)` it is prefixed with another `_0x`
 >   e.g. `repo_0x2F_name` becomes `repo_0x_0x2F_name`.
+> - the `[git|fs|refs]metricscollectiontime` is a meta metric and represents system time (in millis) when the
+>   particular group of metrics was collected - to easily verify if the corresponding metrics are stale
 
 Settings
 --------
