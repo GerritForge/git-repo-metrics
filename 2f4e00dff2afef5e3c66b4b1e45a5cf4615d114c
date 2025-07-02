@@ -22,6 +22,30 @@
       },
       "revId": "2f4e00dff2afef5e3c66b4b1e45a5cf4615d114c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "637735f7_4909e299",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRefsMetricsCollector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-07-02T14:20:15Z",
+      "side": 1,
+      "message": "@syntonyze@gmail.com Good point. Initially, I assumed that recording the timestamp after the collection would be sufficient and would simplify exception handling, while still providing a meaningful value for our use case.\n\nHowever, looking at the code again, capturing the timestamp at the start of the collection wouldn’t add complexity and would be more accurate. It would clearly indicate that “these metrics represent a snapshot of the system taken at $collectionTime.”\n\n@geminica.programs@gmail.com WDYT?",
+      "parentUuid": "f36d63f1_da794467",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 68
+      },
+      "revId": "2f4e00dff2afef5e3c66b4b1e45a5cf4615d114c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
