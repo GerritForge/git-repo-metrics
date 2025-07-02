@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f36d63f1_da794467",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRefsMetricsCollector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-07-02T14:07:14Z",
+      "side": 1,
+      "message": "nit: I was wondering what\u0027s the rationale of collecting this time *after* the metrics have been computed, rather than *before*.\n\nIf we read the refs (or the directories, etc) at T0 and finish computation at T1, shouldn\u0027t we expose a collection time of T0, to state that that\u0027s what the metrics are based on?\n\nIn this way, the collection time will always represent the *scheduling* frequency, irrespective of how long it took to process the underlying git data, telling us \"this metrics are based on a read that happened at $collectionTime\"",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 68
+      },
+      "revId": "2f4e00dff2afef5e3c66b4b1e45a5cf4615d114c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
