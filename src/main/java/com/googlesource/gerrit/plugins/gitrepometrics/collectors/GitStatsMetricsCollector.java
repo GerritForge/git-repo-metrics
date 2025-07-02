@@ -20,13 +20,11 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.UpdateGitMetricsExecutor;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.internal.storage.file.GC;
 
-public class GitStatsMetricsCollector implements MetricsCollector {
+public class GitStatsMetricsCollector extends AbstractMetricsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   public static final GitRepoMetric numberOfPackedObjects =
@@ -56,9 +54,6 @@ public class GitStatsMetricsCollector implements MetricsCollector {
           "numberOfPackFilesSinceBitmap",
           "The number of pack files that were created after the last bitmap generation",
           "Count");
-  private static final GitRepoMetric collectionTime =
-      new GitRepoMetric(
-          "gitMetricsCollectionTime", "Timestamp at which metrics were collected", "Milliseconds");
 
   private static final ImmutableList<GitRepoMetric> availableMetrics =
       ImmutableList.of(
@@ -71,55 +66,35 @@ public class GitStatsMetricsCollector implements MetricsCollector {
           sizeOfPackedObjects,
           numberOfBitmaps,
           numberOfObjectsSinceBitmap,
-          numberOfPackFilesSinceBitmap,
-          collectionTime);
-
-  private final ExecutorService executorService;
+          numberOfPackFilesSinceBitmap);
 
   @Inject
   public GitStatsMetricsCollector(
       @UpdateGitMetricsExecutor ScheduledExecutorService executorService) {
-    this.executorService = executorService;
+    super(executorService, "git", availableMetrics);
   }
 
   @Override
-  public void collect(
-      FileRepository repository,
-      String projectName,
-      Consumer<HashMap<GitRepoMetric, Long>> populateMetrics) {
+  protected HashMap<GitRepoMetric, Long> computeMetrics(
+      FileRepository repository, String projectName) {
+    HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
+    try {
+      GC.RepoStatistics statistics = new GC(repository).getStatistics();
+      metrics.put(numberOfPackedObjects, statistics.numberOfPackedObjects);
+      metrics.put(numberOfPackFiles, statistics.numberOfPackFiles);
+      metrics.put(numberOfLooseObjects, statistics.numberOfLooseObjects);
+      metrics.put(numberOfLooseRefs, statistics.numberOfLooseRefs);
+      metrics.put(numberOfPackedRefs, statistics.numberOfPackedRefs);
+      metrics.put(sizeOfLooseObjects, statistics.sizeOfLooseObjects);
+      metrics.put(sizeOfPackedObjects, statistics.sizeOfPackedObjects);
+      metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
+      metrics.put(numberOfObjectsSinceBitmap, statistics.numberOfObjectsSinceBitmap);
+      metrics.put(numberOfPackFilesSinceBitmap, statistics.numberOfPackFilesSinceBitmap);
+      logger.atFine().log("New Git Statistics metrics collected: %s", statistics.toString());
+    } catch (IOException e) {
+      logger.atSevere().log("Something went wrong: %s", e.getMessage());
+    }
 
-    executorService.submit(
-        () -> {
-          HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
-          try {
-            GC.RepoStatistics statistics = new GC(repository).getStatistics();
-            metrics.put(numberOfPackedObjects, statistics.numberOfPackedObjects);
-            metrics.put(numberOfPackFiles, statistics.numberOfPackFiles);
-            metrics.put(numberOfLooseObjects, statistics.numberOfLooseObjects);
-            metrics.put(numberOfLooseRefs, statistics.numberOfLooseRefs);
-            metrics.put(numberOfPackedRefs, statistics.numberOfPackedRefs);
-            metrics.put(sizeOfLooseObjects, statistics.sizeOfLooseObjects);
-            metrics.put(sizeOfPackedObjects, statistics.sizeOfPackedObjects);
-            metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
-            metrics.put(numberOfObjectsSinceBitmap, statistics.numberOfObjectsSinceBitmap);
-            metrics.put(numberOfPackFilesSinceBitmap, statistics.numberOfPackFilesSinceBitmap);
-            metrics.put(collectionTime, System.currentTimeMillis());
-            logger.atFine().log("New Git Statistics metrics collected: %s", statistics.toString());
-          } catch (IOException e) {
-            logger.atSevere().log("Something went wrong: %s", e.getMessage());
-          }
-
-          populateMetrics.accept(metrics);
-        });
-  }
-
-  @Override
-  public ImmutableList<GitRepoMetric> availableMetrics() {
-    return availableMetrics;
-  }
-
-  @Override
-  public String getMetricsCollectorName() {
-    return "git-statistics";
+    return metrics;
   }
 }

@@ -24,7 +24,6 @@ import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 
 class FakeMetricsCollector implements MetricsCollector {
-  private final String prefix;
   private final GitRepoMetric fakeMetric1;
   private final GitRepoMetric fakeMetric2;
 
@@ -37,17 +36,11 @@ class FakeMetricsCollector implements MetricsCollector {
   }
 
   @Override
-  public String getMetricsCollectorName() {
-    return prefix + "-fake-metrics-collector";
-  }
-
-  @Override
   public ImmutableList<GitRepoMetric> availableMetrics() {
     return ImmutableList.of(fakeMetric1, fakeMetric2);
   }
 
   protected FakeMetricsCollector(String prefix) {
-    this.prefix = prefix;
     this.fakeMetric1 = new GitRepoMetric(prefix + "-fake-metric-1", "Fake metric 1", "Count");
     this.fakeMetric2 = new GitRepoMetric(prefix + "-fake-metric-2", "Fake metric 2", "Count");
   }
