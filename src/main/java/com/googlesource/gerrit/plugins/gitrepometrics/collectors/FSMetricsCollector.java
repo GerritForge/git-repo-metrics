@@ -80,7 +80,7 @@ public class FSMetricsCollector implements MetricsCollector {
   protected static final GitRepoMetric numberOfDirectories =
       new GitRepoMetric("numberOfDirectories", "Number of directories on filesystem", "Count");
   protected static final GitRepoMetric numberOfFiles =
-      new GitRepoMetric("numberOfFiles", "Number of directories on filesystem", "Count");
+      new GitRepoMetric("numberOfFiles", "Number of files on filesystem", "Count");
   private static final GitRepoMetric collectionTime =
       new GitRepoMetric(
           "fsMetricsCollectionTime", "Timestamp at which metrics were collected", "Milliseconds");
