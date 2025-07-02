@@ -78,7 +78,7 @@ public class FSMetricsCollector extends AbstractMetricsCollector {
   protected static final GitRepoMetric numberOfDirectories =
       new GitRepoMetric("numberOfDirectories", "Number of directories on filesystem", "Count");
   protected static final GitRepoMetric numberOfFiles =
-      new GitRepoMetric("numberOfFiles", "Number of directories on filesystem", "Count");
+      new GitRepoMetric("numberOfFiles", "Number of files on filesystem", "Count");
 
   private static final ImmutableList<GitRepoMetric> availableMetrics =
       ImmutableList.of(
