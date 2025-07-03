@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "758a95cd_1f422f15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-07-03T07:41:27Z",
+      "side": 1,
+      "message": "This suggest to break this down into two changes, as you\u0027ve mentioned.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "d0c749e1310811f776d3e4fb251879b3efc0d8f5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb1c925_21864649",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-07-03T07:41:27Z",
+      "side": 1,
+      "message": "I\u0027d suggest to first remove the unused method and then extract the common functionality in an abstract class.",
+      "revId": "d0c749e1310811f776d3e4fb251879b3efc0d8f5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
