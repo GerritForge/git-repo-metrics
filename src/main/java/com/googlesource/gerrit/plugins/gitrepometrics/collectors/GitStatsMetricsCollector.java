@@ -118,9 +118,4 @@ public class GitStatsMetricsCollector implements MetricsCollector {
   public ImmutableList<GitRepoMetric> availableMetrics() {
     return availableMetrics;
   }
-
-  @Override
-  public String getMetricsCollectorName() {
-    return "git-statistics";
-  }
 }

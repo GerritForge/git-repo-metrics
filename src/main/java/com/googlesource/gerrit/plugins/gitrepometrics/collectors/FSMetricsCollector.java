@@ -154,11 +154,6 @@ public class FSMetricsCollector implements MetricsCollector {
   }
 
   @Override
-  public String getMetricsCollectorName() {
-    return "filesystem-statistics";
-  }
-
-  @Override
   public ImmutableList<GitRepoMetric> availableMetrics() {
     return availableMetrics;
   }

@@ -85,11 +85,6 @@ public class GitRefsMetricsCollector implements MetricsCollector {
   }
 
   @Override
-  public String getMetricsCollectorName() {
-    return "repo-ref-statistics";
-  }
-
-  @Override
   public ImmutableList<GitRepoMetric> availableMetrics() {
     return availableMetrics;
   }
