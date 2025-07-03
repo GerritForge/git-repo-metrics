@@ -46,6 +46,30 @@
       },
       "revId": "2f4e00dff2afef5e3c66b4b1e45a5cf4615d114c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32cb8af5_c3dd3a30",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRefsMetricsCollector.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2025-07-03T05:09:14Z",
+      "side": 1,
+      "message": "have mixed feelings about it but no strong arguments against the idea so why not :D",
+      "parentUuid": "637735f7_4909e299",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 68
+      },
+      "revId": "2f4e00dff2afef5e3c66b4b1e45a5cf4615d114c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
