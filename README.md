@@ -16,7 +16,7 @@ Example:
 
 ```
 git clone --recursive https://gerrit.googlesource.com/gerrit
-git clone https://gerrit.googlesource.com/plugins/git-repo-metrics
+git clone https://github.com/GerritForge/git-repo-metrics
 pushd gerrit/plugins && ln -s ../../git-repo-metrics . && popd
 cd gerrit && bazel build plugins/git-repo-metrics
 ```
