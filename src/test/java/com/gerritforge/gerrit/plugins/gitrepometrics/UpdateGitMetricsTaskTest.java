@@ -1,0 +1,110 @@
+// Copyright (C) 2025 GerritForge, Inc.
+//
+// Licensed under the BSL 1.1 (the "License");
+// you may not use this file except in compliance with the License.
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package com.gerritforge.gerrit.plugins.gitrepometrics;
+
+import static com.google.common.truth.Truth.assertThat;
+import static java.nio.file.Files.delete;
+
+import com.codahale.metrics.MetricRegistry;
+import com.google.gerrit.entities.Project;
+import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.metrics.DisabledMetricMaker;
+import com.google.gerrit.server.config.GerritServerConfig;
+import com.google.gerrit.server.config.SitePath;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Provides;
+import com.gerritforge.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
+import java.io.File;
+import java.nio.file.Path;
+import java.util.Collections;
+import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.Config;
+import org.eclipse.jgit.lib.Repository;
+import org.junit.Before;
+import org.junit.Test;
+
+public class UpdateGitMetricsTaskTest {
+  private final String projectName = "testProject";
+  private final Project.NameKey projectNameKey = Project.nameKey(projectName);
+  private Repository testRepository;
+  private Project testProject;
+  private GitRepoMetricsCache gitRepoMetricsCache;
+  private FakeMetricsCollector fakeStatsCollector;
+  private DynamicSet<MetricsCollector> ds;
+
+  @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
+
+  @Before
+  public void setupRepository() throws Exception {
+    ConfigSetupUtils configSetupUtils = new ConfigSetupUtils(Collections.singletonList("repo1"));
+
+    fakeStatsCollector = new FakeMetricsCollector();
+    ds = new DynamicSet<>();
+    ds.add("git-repo-metrics", fakeStatsCollector);
+
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(
+            ds,
+            new DisabledMetricMaker(),
+            new ProjectlessMetricsTracker("git-repo-metrics", new MetricRegistry()),
+            configSetupUtils.getGitRepoMetricsConfig());
+
+    AbstractModule m =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(new UpdateGitMetricsTaskModule());
+            bind(GitRepoMetricsConfig.class).toInstance(configSetupUtils.getGitRepoMetricsConfig());
+            bind(GitRepoMetricsCache.class).toInstance(gitRepoMetricsCache);
+            bind(Config.class)
+                .annotatedWith(GerritServerConfig.class)
+                .toInstance(configSetupUtils.getConfig());
+          }
+
+          @Provides
+          @SitePath
+          Path getSitePath() {
+            return configSetupUtils.getBasePath();
+          }
+        };
+    Injector injector = Guice.createInjector(m);
+    injector.injectMembers(this);
+
+    try {
+      testRepository =
+          new FileRepository(new File(configSetupUtils.getGitBasePath().toFile(), projectName));
+      testRepository.create(true);
+    } catch (Exception e) {
+      delete(configSetupUtils.getGitBasePath());
+      throw e;
+    }
+    testProject = Project.builder(projectNameKey).build();
+  }
+
+  @Test
+  public void shouldUpdateMetrics() {
+    UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
+    updateGitMetricsTask.run();
+    assertThat(gitRepoMetricsCache.getMetrics().keySet()).isNotEmpty();
+  }
+
+  @Test
+  public void shouldNotUpdateMetricsIfRepoDoesNotExist() {
+    UpdateGitMetricsTask updateGitMetricsTask =
+        updateGitMetricsTaskFactory.create("nonExistentProject");
+    updateGitMetricsTask.run();
+    assertThat(gitRepoMetricsCache.getMetrics().keySet()).isEmpty();
+  }
+}
