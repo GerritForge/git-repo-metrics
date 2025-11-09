@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7bd798f_cb841598",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-11-09T11:50:16Z",
+      "side": 1,
+      "message": "Point to GitHub.\n\n\n\n```suggestion\ngit clone https://github.com/GerritForge/git-repo-metrics\n```",
+      "range": {
+        "startLine": 19,
+        "startChar": 10,
+        "endLine": 19,
+        "endChar": 38
+      },
+      "revId": "f91b94acc55d2ae56655647016edf3300e20fef7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
