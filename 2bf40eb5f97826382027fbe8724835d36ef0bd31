@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f63c15f_866a633a",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000177
+      },
+      "writtenOn": "2026-06-09T13:12:24Z",
+      "side": 1,
+      "message": "Nit: this is not needed.",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 6
+      },
+      "revId": "2bf40eb5f97826382027fbe8724835d36ef0bd31",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a282b231_22193bdb",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000177
+      },
+      "writtenOn": "2026-06-09T13:12:24Z",
+      "side": 1,
+      "message": "Remove this attribute now, see documentation:\n\nname: Name of the junit test target. Defaults to `\u003cplugin\u003e_tests`.\n\n```suggestion\n    plugin \u003d \"git-repo-metrics\",\n```",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 32
+      },
+      "revId": "2bf40eb5f97826382027fbe8724835d36ef0bd31",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef6dec20_62b7448d",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000177
+      },
+      "writtenOn": "2026-06-09T13:12:24Z",
+      "side": 1,
+      "message": "If you pass plugin name, you don\u0027t need pass tag as it\u0027s derived from the plugin name, see documentation:\n\ntags: Optional list of tags for the test target. If `plugin` is set, it\n        is added automatically if not already present.\n\n```suggestion\n    resources \u003d glob([\"src/test/resources/**/*\"]),\n```",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 32
+      },
+      "revId": "2bf40eb5f97826382027fbe8724835d36ef0bd31",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
