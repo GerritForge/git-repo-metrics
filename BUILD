@@ -1,10 +1,8 @@
-load("@rules_java//java:defs.bzl", "java_binary", "java_library")
-load("//tools/bzl:junit.bzl", "junit_tests")
 load(
-    "//tools/bzl:plugin.bzl",
-    "PLUGIN_DEPS",
-    "PLUGIN_TEST_DEPS",
+    "@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl",
     "gerrit_plugin",
+    "gerrit_plugin_test_util",
+    "gerrit_plugin_tests",
 )
 
 gerrit_plugin(
@@ -24,9 +22,9 @@ gerrit_plugin(
     ),
 )
 
-java_library(
+gerrit_plugin_test_util(
     name = "git-repo-metrics_tests_lib",
-    testonly = True,
+    plugin = "git-repo-metrics",
     srcs = glob(
         ["src/test/java/**/*.java"],
         exclude = [
@@ -37,13 +35,10 @@ java_library(
     tags = [
         "git-repo-metrics",
     ],
-    deps = [
-        "git-repo-metrics__plugin_test_deps",
-    ],
 )
 
-junit_tests(
-    name = "git-repo-metrics_tests",
+gerrit_plugin_tests(
+    plugin = "git-repo-metrics",
     srcs = glob(
         [
             "src/test/java/**/*Test.java",
@@ -51,26 +46,7 @@ junit_tests(
         ],
     ),
     resources = glob(["src/test/resources/**/*"]),
-    tags = [
-        "git-repo-metrics",
-    ],
     deps = [
-        ":git-repo-metrics__plugin_test_deps",
         ":git-repo-metrics_tests_lib",
     ],
-)
-
-java_library(
-    name = "git-repo-metrics__plugin_test_deps",
-    testonly = 1,
-    visibility = ["//visibility:public"],
-    exports = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
-        ":git-repo-metrics__plugin",
-    ],
-)
-
-java_library(
-    name = "git-repo-metrics__plugin_deps",
-    visibility = ["//visibility:public"],
-    exports = PLUGIN_DEPS
 )
