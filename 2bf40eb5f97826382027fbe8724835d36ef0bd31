@@ -47,6 +47,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97918c86_35c617ed",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2026-06-09T14:54:35Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "a282b231_22193bdb",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 32
+      },
+      "revId": "2bf40eb5f97826382027fbe8724835d36ef0bd31",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef6dec20_62b7448d",
@@ -60,6 +84,30 @@
       "writtenOn": "2026-06-09T13:12:24Z",
       "side": 1,
       "message": "If you pass plugin name, you don\u0027t need pass tag as it\u0027s derived from the plugin name, see documentation:\n\ntags: Optional list of tags for the test target. If `plugin` is set, it\n        is added automatically if not already present.\n\n```suggestion\n    resources \u003d glob([\"src/test/resources/**/*\"]),\n```",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 32
+      },
+      "revId": "2bf40eb5f97826382027fbe8724835d36ef0bd31",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e977d628_4d74bd9f",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2026-06-09T14:54:35Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ef6dec20_62b7448d",
       "range": {
         "startLine": 49,
         "startChar": 0,
