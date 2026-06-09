@@ -11,8 +11,8 @@
 
 package com.gerritforge.gerrit.plugins.gitrepometrics;
 
-import static com.google.common.truth.Truth.assertThat;
 import static com.gerritforge.gerrit.plugins.gitrepometrics.GitRepoUpdateListener.REF_REPLICATED_EVENT_SUFFIX;
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -91,8 +91,8 @@ public class GitUpdateListenerTest {
 
     reset(mockedExecutorService);
     doNothing().when(mockedExecutorService).execute(updateGitMetricsTaskCaptor.capture());
-    repoManager.createRepository(enabledProjectNameKey);
-    repoManager.createRepository(disabledProjectNameKey);
+    var unused1 = repoManager.createRepository(enabledProjectNameKey);
+    var unused2 = repoManager.createRepository(disabledProjectNameKey);
 
     gitRepoUpdateListener =
         new GitRepoUpdateListener(
