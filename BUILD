@@ -15,6 +15,7 @@ gerrit_plugin(
     manifest_entries = [
         "Gerrit-PluginName: git-repo-metrics",
         "Gerrit-Module: com.gerritforge.gerrit.plugins.gitrepometrics.Module",
+        "Gerrit-HttpModule: com.gerritforge.gerrit.plugins.bsl.HttpModule",
         "Implementation-Title: git-repo-metrics plugin",
         "Implementation-URL: https://github.com/GerritForge/git-repo-metrics",
         "Implementation-Vendor: GerritForge",
@@ -22,7 +23,10 @@ gerrit_plugin(
     resources = glob(
         ["src/main/resources/**/*"],
     ),
-    deps = ["@commons-codec//jar"],
+    deps = [
+        "//plugins/gerrit-bsl-license",
+        "@commons-codec//jar",
+    ],
 )
 
 java_library(
@@ -73,5 +77,5 @@ java_library(
 java_library(
     name = "git-repo-metrics__plugin_deps",
     visibility = ["//visibility:public"],
-    exports = PLUGIN_DEPS
+    exports = PLUGIN_DEPS,
 )
