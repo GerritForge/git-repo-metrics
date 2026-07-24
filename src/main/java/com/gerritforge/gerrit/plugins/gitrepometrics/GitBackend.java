@@ -31,6 +31,13 @@ public enum GitBackend {
           sha256OfProjectName.substring(2, 4),
           sha256OfProjectName);
     }
+  },
+
+  GITHUB {
+    @Override
+    public String repoPath(String projectName) {
+      return projectName;
+    }
   };
 
   abstract String repoPath(String projectName);
