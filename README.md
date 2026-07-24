@@ -55,6 +55,7 @@ than Gerrit the usual hooks aren't triggered.
 Finally, a configuration option will need to be specified to indicate which Backend is being used.
 Currently supported backend, other than GERRIT are:
 - GITLAB
+- GITHUB
 
 Find more in the configuration section below.
 
