@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cee7983_88c00174",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2026-07-27T14:52:11Z",
+      "side": 1,
+      "message": "Can you update the documentation as well?\n\nI think the documentation also needs to clarify what the use case is for using a Gerrit plugin to read metrics from another SCM project, since it can be confusing.\n\n\nHowever, this can be done in a separate change.",
+      "revId": "25cc8b69cfbf92993025fc3201669dc571dfe05d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
