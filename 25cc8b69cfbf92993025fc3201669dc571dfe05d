@@ -16,6 +16,24 @@
       "message": "Can you update the documentation as well?\n\nI think the documentation also needs to clarify what the use case is for using a Gerrit plugin to read metrics from another SCM project, since it can be confusing.\n\n\nHowever, this can be done in a separate change.",
       "revId": "25cc8b69cfbf92993025fc3201669dc571dfe05d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a22fb6_3865fb7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1020677
+      },
+      "writtenOn": "2026-07-27T15:00:27Z",
+      "side": 1,
+      "message": "Updated the docs to add GitHub as supported backend, however, we already mention what the use case to run it alongside another backend is. Don\u0027t think we need to add much else?\n\nWDYT?",
+      "parentUuid": "2cee7983_88c00174",
+      "revId": "25cc8b69cfbf92993025fc3201669dc571dfe05d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
