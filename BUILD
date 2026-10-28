@@ -74,5 +74,5 @@ java_library(
 java_library(
     name = "git-repo-metrics__plugin_deps",
     visibility = ["//visibility:public"],
-    exports = PLUGIN_DEPS
+    exports = PLUGIN_DEPS,
 )
